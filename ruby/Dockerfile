@@ -85,4 +85,5 @@ ENV NODE_ENV=development \
 # Set "rails server -b 0.0.0.0" as the command to
 # run when this container starts.
 # RUN bundle exec rails server -e production -p 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]    # u can use it but i want to run many commands at statrtup so i will use entrypoint.sh
+CMD ["/app/entrypoint.sh"]
