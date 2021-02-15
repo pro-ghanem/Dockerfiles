@@ -3,7 +3,7 @@ A Web Server Gateway Interface - WSGI - does this job. WSGI is a Python standard
 uWSGI is a WSGI implementation. 
 
 
-# here is how is things work in the background
+#here is how is things work in the background
 the web client <-> the web server <-> uwsgi <-> Django
 
 
