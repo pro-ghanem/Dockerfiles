@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: catalog
+  name: catalog
+  namespace: staging
+
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: catalog
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      # NOTE : using Linkerd here 
+        linkerd.io/inject: enabled
+      creationTimestamp: null
+      labels:
+        app: catalog
+    spec:
+      containers:
+#      - env:
+#        - name: ELASTIC_APM_SERVICE_URL
+#          value: http://apm-server:8200
+#        - name: ELASTIC_APM_SERVICE_NAME
+#          value: dev-portal
+        image: ************.dkr.ecr.eu-west-1.amazonaws.com/devportal:staging-233
+        imagePullPolicy: Always
+        name: catalog
+        ports:
+        - containerPort: 8000
+          protocol: TCP
